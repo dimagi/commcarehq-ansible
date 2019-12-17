@@ -1,10 +1,10 @@
 dev_users:
   present:
-    - sravfeyn
     - administrator
     - echis_demisew
   absent:
     - echis_melese
+    - sravfeyn
     - jroth
     - droberts
     - echis_preethi
