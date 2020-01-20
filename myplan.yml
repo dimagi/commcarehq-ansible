@@ -1,4 +1,3 @@
 # myplan.yml
 target_allocation:
-#  - echis_server0,echis_server1,echis_server3:3 
-  - echis0,echis1,echis3:3 
+  - echis_server0,echis_server3,echis_server1:3 

@@ -61,7 +61,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     ucr_indicator_queue:
       concurrency: 6
   'celery2':
@@ -72,7 +72,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     ucr_indicator_queue:
       concurrency: 6
     dashboard_comparison_queue:
@@ -85,7 +85,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     ucr_indicator_queue:
       concurrency: 4
     icds_dashboard_reports_queue:
@@ -139,7 +139,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -148,7 +148,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -161,7 +161,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -174,7 +174,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -188,7 +188,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -202,7 +202,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 2
+      num_workers: 1
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -213,7 +213,7 @@ celery_processes:
     reminder_queue:
       pooling: gevent
       concurrency: 5
-      num_workers: 4
+      num_workers: 2
     sms_queue:
       pooling: gevent
       concurrency: 10
@@ -250,57 +250,105 @@ pillows:
     kafka-ucr-static-awc-location:
       num_processes: 1
       processor_chunk_size: 100
+    kafka-ucr-main:
+      num_processes: 1
+      processor_chunk_size: 100
   'pillow22':
   'pillow23':
-    xform-pillow:
+    xform-pillow-non-dashboard:
       start_process: 0
-      num_processes: 12
-      total_processes: 48
+      num_processes: 8
+      total_processes: 32
+      processor_chunk_size: 100
+    xform-pillow-dashboard:
+      start_process: 0
+      num_processes: 8
+      total_processes: 32
       processor_chunk_size: 100
   'pillow24':
-    xform-pillow:
-      start_process: 12
-      num_processes: 12
-      total_processes: 48
+    xform-pillow-non-dashboard:
+      start_process: 8
+      num_processes: 8
+      total_processes: 32
+      processor_chunk_size: 100
+    xform-pillow-dashboard:
+      start_process: 8
+      num_processes: 8
+      total_processes: 32
       processor_chunk_size: 100
   'pillow25':
-    xform-pillow:
-      start_process: 24
-      num_processes: 12
-      total_processes: 48
+    xform-pillow-non-dashboard:
+      start_process: 16
+      num_processes: 8
+      total_processes: 32
+      processor_chunk_size: 100
+    xform-pillow-dashboard:
+      start_process: 16
+      num_processes: 8
+      total_processes: 32
       processor_chunk_size: 100
   'pillow26':
-    xform-pillow:
-      start_process: 36
-      num_processes: 12
-      total_processes: 48
+    xform-pillow-non-dashboard:
+      start_process: 24
+      num_processes: 8
+      total_processes: 32
+      processor_chunk_size: 100
+    xform-pillow-dashboard:
+      start_process: 24
+      num_processes: 8
+      total_processes: 32
       processor_chunk_size: 100
   'pillow27':
-    case-pillow:
+    case-pillow-non-dashboard:
+      start_process: 0
+      num_processes: 6
+      total_processes: 30
+      processor_chunk_size: 100
+    case-pillow-dashboard:
       start_process: 0
       num_processes: 24
       total_processes: 120
       processor_chunk_size: 100
   'pillow28':
-    case-pillow:
+    case-pillow-non-dashboard:
+      start_process: 6
+      num_processes: 6
+      total_processes: 30
+      processor_chunk_size: 100
+    case-pillow-dashboard:
       start_process: 24
       num_processes: 24
       total_processes: 120
       processor_chunk_size: 100
   'pillow29':
-    case-pillow:
+    case-pillow-non-dashboard:
+      start_process: 12
+      num_processes: 6
+      total_processes: 30
+      processor_chunk_size: 100
+    case-pillow-dashboard:
       start_process: 48
       num_processes: 24
       total_processes: 120
       processor_chunk_size: 100
   'pillow30':
-    case-pillow:
+    case-pillow-non-dashboard:
+      start_process: 18
+      num_processes: 6
+      total_processes: 30
+      processor_chunk_size: 100
+    case-pillow-dashboard:
       start_process: 72
       num_processes: 24
       total_processes: 120
       processor_chunk_size: 100
   'pillow31':
-    case-pillow:
+    case-pillow-non-dashboard:
+      start_process: 24
+      num_processes: 6
+      total_processes: 30
+      processor_chunk_size: 100
+    case-pillow-dashboard:
       start_process: 96
       num_processes: 24
       total_processes: 120

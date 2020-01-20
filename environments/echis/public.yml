@@ -80,7 +80,6 @@ localsettings:
   COMMCARE_NAME: 'eCHIS'
   COUCH_CACHE_DOCS: True
   COUCH_CACHE_VIEWS: True
-  COUCH_STALE_QUERY: 'update_after'
   DEPLOY_MACHINE_NAME: "{{ ansible_hostname }}"
   EMAIL_SMTP_HOST: 'smtp.gmail.com'
   EMAIL_SMTP_PORT: 587
@@ -94,12 +93,17 @@ localsettings:
   REDIS_PORT: '6379'
   REMINDERS_QUEUE_ENABLED: True
   SMS_QUEUE_ENABLED: True
+  cchq_bug_report_email: echismoh@moh.gov.et
+  #timezone: Africa/Addis_Ababa
   STATIC_ROOT:
   WS4REDIS_CONNECTION_HOST: "{{ groups.redis.0 }}"
   ENABLE_PRELOGIN_SITE: False
   ENTERPRISE_MODE: True
   RESTRICT_DOMAIN_CREATION: True
-
 minio_server_datadirs:
   - /usr/local/share/minio
 minio_server_cluster_nodes: "{{ groups['minio']|map('string_prefix', '/usr/local/share/minio')|map('string_postfix', 'http://')|list }}"
+#  STATIC_TOGGLE_STATES:
+#    mobile_ucr_linked_domain:
+#      always_enabled:
+#        - 'fmoh-echis-staging'

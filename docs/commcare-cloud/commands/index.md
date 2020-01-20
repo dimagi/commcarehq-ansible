@@ -567,7 +567,7 @@ Export Sentry events. One line per event JSON.
 
 ```
 commcare-cloud <env> export-sentry-events -k API_KEY -p PROJECT_ID [-q QUERY] [--start START] [--end END]
-                                          --organization ORGANIZATION
+                                          [--organization ORGANIZATION] [--full]
 ```
 
 ##### Optional Arguments
@@ -595,6 +595,10 @@ UTC end date. Format YYYY-MM-DDTHH:MM:SS
 ###### `--organization ORGANIZATION`
 
 Organization slug
+
+###### `--full`
+
+Export the full event details
 
 ---
 ### Operational
@@ -981,8 +985,8 @@ Manage services.
 ```
 commcare-cloud <env> service [--only PROCESS_PATTERN]
                              
-                             {celery,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker}
-                             [{celery,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker} ...]
+                             {celery,citusdb,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker}
+                             [{celery,citusdb,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker} ...]
                              {start,stop,restart,status,logs,help}
 ```
 
@@ -1004,7 +1008,7 @@ service and the `pgbouncer` service. We'll call the actual services
 
 ##### Positional Arguments
 
-###### `{celery,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker}`
+###### `{celery,citusdb,commcare,couchdb2,elasticsearch,elasticsearch-classic,formplayer,kafka,nginx,pillowtop,postgresql,rabbitmq,redis,webworker}`
 
 The name of the service group(s) to apply the action to.
 There is a preset list of service groups that are supported.
@@ -1187,8 +1191,18 @@ Gives additional databases on the server.
 Report of celery resources by queue.
 
 ```
-commcare-cloud <env> celery-resource-report
+commcare-cloud <env> celery-resource-report [--show-workers] [--csv]
 ```
+
+##### Optional Arguments
+
+###### `--show-workers`
+
+Includes the list of worker nodes for each queue
+
+###### `--csv`
+
+Output table as CSV
 
 ---
 
@@ -1197,8 +1211,14 @@ commcare-cloud <env> celery-resource-report
 Report of pillow resources.
 
 ```
-commcare-cloud <env> pillow-resource-report
+commcare-cloud <env> pillow-resource-report [--csv]
 ```
+
+##### Optional Arguments
+
+###### `--csv`
+
+Output table as CSV
 
 ---
 
