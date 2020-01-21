@@ -101,9 +101,9 @@ localsettings:
   ENABLE_PRELOGIN_SITE: False
   ENTERPRISE_MODE: True
   RESTRICT_DOMAIN_CREATION: True
-minio_server_datadirs:
-  - /usr/local/share/minio
-minio_server_cluster_nodes: "{{ groups['minio']|map('string_prefix', '/usr/local/share/minio')|map('string_postfix', 'http://')|list }}"
+  minio_server_datadirs:
+    - /usr/local/share/minio
+  minio_server_cluster_nodes: "{{ groups['minio']|map('string_prefix', '/usr/local/share/minio')|map('string_postfix', 'http://')|list }}"
   STATIC_TOGGLE_STATES:
     mobile_ucr_linked_domain:
       always_enabled:
