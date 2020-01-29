@@ -1,0 +1,27 @@
+---
+- name: install systemd service
+  become: yes
+  become_user: root
+  register: couchdb_cluster_service_def
+  with_items:
+    - f: couchdb.service
+      d: /etc/systemd/system
+  template:
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m|default("0644")}}'
+
+- name: systemctl daemon-reload
+  become: yes
+  become_user: root
+  when: couchdb_activate and couchdb_cluster_service_def|changed
+  command: systemctl daemon-reload
+    
+- name: launch couchdb service
+  become: yes
+  become_user: root
+  when: couchdb_activate
+  service:
+    name: couchdb
+    enabled: true
+    state: started

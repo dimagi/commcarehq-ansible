@@ -1,7 +1,7 @@
 #!/bin/bash
 rsync -e 'ssh -oStrictHostKeyChecking=no' --append-verify -aH --info=progress2 \
     --checksum \
-    ansible@source_host1:source_dir1 target_dir1 \
+    ansible@:source_dir1 target_dir1 \
      \
      \
     -r $@ &
@@ -10,9 +10,9 @@ rsync -e 'ssh -oStrictHostKeyChecking=no' --append-verify -aH --info=progress2 \
 
 rsync -e 'ssh -oStrictHostKeyChecking=no' --append-verify -aH --info=progress2 \
     \
-    ansible@source_host1:source_dir2 target_dir2 \
+    ansible@172.19.3.41:source_dir2 target_dir2 \
      \
-    --files-from /tmp/file_migration/source_host1_ab2c0d8f__files \
+    --files-from /tmp/file_migration/172.19.3.41_ab2c0d8f__files \
     -r $@ &
 
     pids[1]=$!

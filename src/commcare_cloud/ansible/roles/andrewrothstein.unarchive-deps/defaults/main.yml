@@ -1,0 +1,9 @@
+---
+unarchive_deps_all_pkgs:
+  - unzip
+  - gzip
+  - bzip2
+unarchive_deps_tar_pkgs:
+  - tar
+unarchive_deps_xz_pkgs:
+  - xz

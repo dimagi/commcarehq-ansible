@@ -1,0 +1,16 @@
+---
+couchdb_dep_pkgs:
+  - curl-devel
+  - erlang-asn1
+  - erlang-erts
+  - erlang-eunit
+  - gcc-c++
+  - erlang-os_mon
+  - erlang-xmerl
+  - erlang-erl_interface
+  - erlang-reltool
+  - help2man
+  - js-devel
+  - libicu-devel
+  - libtool
+  - perl-Test-Harness

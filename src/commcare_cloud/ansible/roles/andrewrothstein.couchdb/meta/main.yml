@@ -1,0 +1,31 @@
+dependencies:
+- role: andrewrothstein.unarchive-deps
+  version: v1.0.12
+- role: andrewrothstein.gcc-toolbox
+  version: v1.0.11
+galaxy_info:
+  author: Andrew Rothstein
+  company: BlackRock
+  description: installs couchdb
+  galaxy_tags:
+  - database
+  - couchdb
+  license:
+  - MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - stretch
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: Fedora
+    version:
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28

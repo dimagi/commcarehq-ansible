@@ -1,0 +1,6 @@
+{% if couchdb_compaction_settings is defined %}
+[compactions]
+{% for db_name, settings in couchdb_compaction_settings.items() %}
+{{ db_name }} = {{ settings }}
+{% endfor %}
+{% endif %}

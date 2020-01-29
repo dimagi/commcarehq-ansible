@@ -1,0 +1,13 @@
+[Unit]
+Description=CouchDB Server
+After=network.service
+Requires=network.service
+
+[Service]
+User={{couchdb_user}}
+WorkingDirectory={{couchdb_dir}}
+ExecStart={{couchdb_dir}}/bin/couchdb
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

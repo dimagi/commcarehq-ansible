@@ -1,0 +1,6 @@
+{% if couchdb_log_settings is defined %}
+[log]
+{% for key, value in couchdb_log_settings.items() %}
+{{ key }} = {{ value }}
+{% endfor %}
+{% endif %}
