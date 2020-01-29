@@ -1,0 +1,7 @@
+{% if couchdb_cluster_settings is defined %}
+[cluster]
+q={{ couchdb_cluster_settings.q }}
+r={{ couchdb_cluster_settings.r }}
+w={{ couchdb_cluster_settings.w }}
+n={{ couchdb_cluster_settings.n }}
+{% endif %}

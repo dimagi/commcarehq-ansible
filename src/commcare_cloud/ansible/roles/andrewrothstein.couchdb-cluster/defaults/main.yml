@@ -1,0 +1,57 @@
+---
+couchdb_user: couchdb
+couchdb_group: couchdb
+
+#couchdb_port : 5984
+#couchdb_node_port : 5986
+couchdb_bind:
+  ty: static
+  host: '127.0.0.1'
+
+# to bind to the IP for an interface...
+#couchdb_bind:
+#  ty: interface
+#  interface: eth0
+  
+couchdb_dir: /usr/local/couchdb
+couchdb_data_dir: '{{ couchdb_dir }}/data'
+
+couchdb_secure: True
+couchdb_pki_dir: '~/pki-dir'
+couchdb_pki_key_suffix: '-key.pem'
+couchdb_pki_cert_suffix: '.pem'
+
+# additional httpd handlers, e.g. for couchdb-lucene
+#couchdb_httpd_global_handlers :
+#  - endpoint : _fti
+#    url : http://localhost:5985
+
+# to kill the admin party
+#couchdb_admins:
+#  bob: bob-password
+#  alice: alice-password
+
+# When this option is set to true, no requests are allowed from anonymous users. Everyone must be authenticated.
+couchdb_require_valid_user: false
+couchdb_require_valid_user_node_local: false
+
+couchdb_reduce_limit: true
+
+couchdb_init: systemd
+couchdb_activate: True
+couchdb_async_io_threads: 16
+couchdb_instance_uuid: "{{ inventory_hostname|to_uuid|replace('-', '') }}"
+couchdb_httpd_auth_secret: "{{ ansible_product_uuid|hash('sha256') }}"
+
+# couchdb_cluster_settings:
+#   q: 8
+#   r: 2
+#   w: 2
+#   n: 3
+
+# couchdb_compaction_settings:
+#   _default: '[{db_fragmentation, "70%"}, {view_fragmentation, "60%"}, {from, "23:00"}, {to, "04:00"}]'
+
+# couchdb_log_settings:
+#   writer: 'stderr'
+#   level: 'info'

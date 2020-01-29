@@ -1,15 +1,18 @@
 dev_users:
   present:
-    - ctsims
-    - skelly
-    - sravfeyn
     - administrator
+    - echis_demisew
+  absent:
+    - echis_melese
+    - sravfeyn
+    - jroth
+    - droberts
+    - echis_preethi
     - echis_andy
     - echis_anteneh
     - echis_geanaruki
     - echis_esubalew
     - echis_robel
     - echis_siraj
-    - echis_demisew
-  absent:
-    - echis_melese
+    - ctsims
+    - skelly

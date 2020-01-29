@@ -1,10 +1,14 @@
-formplayer_memory: "1024m"
+#jython_memory: "12288m"
+formplayer_memory: "12288m"
 # workers = static_factor + (factor * cpu_count)
-gunicorn_workers_factor: 0
-gunicorn_workers_static_factor: 6
+#gunicorn_workers_factor: 0
+#gunicorn_workers_static_factor: 6
+
+gunicorn_workers_static_factor: 0
+gunicorn_workers_factor: 2
 
 management_commands:
-  echis_server0:
+  echis_server7:
     run_submission_reprocessing_queue:
     queue_schedule_instances:
     handle_survey_actions:
@@ -12,15 +16,26 @@ management_commands:
     run_pillow_retry_queue:
 
 celery_processes:
-  None:
-    repeat_record_queue:
-    async_restore_queue:
-  echis_server0:
-    celery,export_download_queue,email_queue,case_import_queue:
-      concurrency: 1
-    background_queue,case_rule_queue,analytics_queue:
-      concurrency: 1
+  echis_server7: 
     beat: {}
+    flower: {}
+    export_download_queue:
+      concurrency: 5
+    email_queue:
+      pooling: gevent
+      concurrency: 100
+      num_workers: 2
+    case_import_queue:
+      concurrency: 4
+    celery:
+      concurrency: 4
+    background_queue:
+      concurrency: 8
+    case_rule_queue:
+      concurrency: 4
+    analytics_queue:
+      pooling: gevent
+      concurrency: 10
     celery_periodic:
       concurrency: 1
     saved_exports_queue:
@@ -30,55 +45,67 @@ celery_processes:
       concurrency: 1
     reminder_case_update_queue:
       pooling: gevent
-      concurrency: 5
+      concurrency: 1
     reminder_queue:
       pooling: gevent
-      concurrency: 5
-    reminder_rule_queue,ucr_indicator_queue,ucr_queue:
       concurrency: 1
+    reminder_rule_queue:
+      concurrency: 3
+    ucr_queue:
+      concurrency: 4
+    ucr_indicator_queue:
+      concurrency: 2
     sms_queue:
       pooling: gevent
+      concurrency: 1
+    async_restore_queue:
+      concurrency: 8
+    repeat_record_queue:
+      pooling: gevent
       concurrency: 10
-    flower: {}
+    logistics_reminder_queue:
+      concurrency: 2
+    logistics_background_queue:
+      concurrency: 2
+    send_report_throttled:
+      concurrency: 2
+    sumologic_logs_queue:
+      pooling: gevent
+      concurrency: 50
+
 pillows:
-  echis_server0:
-    AppDbChangeFeedPillow:
-      num_processes: 1
-    ApplicationToElasticsearchPillow:
-      num_processes: 1
+  echis_server7:
     CacheInvalidatePillow:
-      num_processes: 1
-    CaseToElasticsearchPillow:
-      num_processes: 1
+      num_processes: 6
     DefaultChangeFeedPillow:
-      num_processes: 1
-    DomainDbKafkaPillow:
-      num_processes: 1
-    FormSubmissionMetadataTrackerPillow:
-      num_processes: 1
-    GroupPillow:
-      num_processes: 1
-    GroupToUserPillow:
-      num_processes: 1
-    KafkaDomainPillow:
-      num_processes: 1
+      num_processes: 10
+    group-pillow:
+      num_processes: 5
     SqlSMSPillow:
       num_processes: 1
     UnknownUsersPillow:
-      num_processes: 1
+      num_processes: 2
     UpdateUserSyncHistoryPillow:
       num_processes: 1
     UserCacheInvalidatePillow:
-      num_processes: 1
+      num_processes: 2
     UserGroupsDbKafkaPillow:
+      num_processes: 2
+    user-pillow:
+      num_processes: 5
+    AppDbChangeFeedPillow:
+      num_processes: 10
+    ApplicationToElasticsearchPillow:
+      num_processes: 3
+    DomainDbKafkaPillow:
+      num_processes: 10
+    KafkaDomainPillow:
+      num_processes: 6
+    case-pillow,xform-pillow,user-pillow:
+      num_processes: 15
+    case-pillow:
+      num_processes: 10
+    xform-pillow:
+      num_processes: 12
+    LedgerToElasticsearchPillow:
       num_processes: 1
-    UserPillow:
-      num_processes: 1
-    XFormToElasticsearchPillow:
-      num_processes: 1
-    kafka-ucr-static:
-      num_processes: 1
-    kafka-ucr-main:
-      num_processes: 1
-   #CaseSearchToElasticsearchPillow
-   #LedgerToElasticsearchPillow

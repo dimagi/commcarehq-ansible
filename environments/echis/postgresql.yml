@@ -3,17 +3,29 @@ pgbouncer_override:
   pgbouncer_default_pool: 290
 
 postgres_override:
-  postgresql_max_connections: 300
-  postgresql_work_mem: '8MB'
-  postgresql_shared_buffers: '8GB'
+  postgresql_max_connections: 1300
+  postgresql_work_mem: '32MB'
+#  maintenance_work_mem: '2048MB'
+#  effective_cache_size: '16384MB'
+  postgresql_shared_buffers: '4GB'
   postgresql_checkpoint_completion_target: '0.7'
-  postgresql_wal_buffers: '16MB'
+  postgresql_wal_buffers: '32MB'
   postgresql_default_statistics_target: '100'
   postgresql_hba_entries:
     - contype: host
       databases: replication
       users: hqrepl
       netmask: 0.0.0.0/0
+#LOAD_BALANCED_APPS:
+#  auth:
+#    - [default, 1]
+#    - [echis_server3, 3]
+#  locations:
+#    - [default, 1]
+#    - [echis_server3, 3]
+#  userreports:
+#    - [default, 1]
+#    - [echis_server3, 3]
 
 dbs:
   form_processing:

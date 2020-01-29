@@ -1,0 +1,42 @@
+---
+sudo: required
+
+services:
+  - docker
+
+language: python
+python: "2.7"
+
+addons:
+  apt:
+    packages:
+      - python-pip
+
+branches:
+  except:
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+
+env:
+  - OS=fedora_23
+  - OS=fedora_24
+  - OS=fedora_25
+  - OS=fedora_26
+  - OS=fedora_27
+  - OS=fedora_28
+  - OS=debian_jessie
+  - OS=debian_stretch
+  - OS=ubuntu_xenial
+    
+before_install:
+  - pip install ansible-galaxy-local-deps dcb==0.0.14
+  - ansible-galaxy-local-deps-write
+
+script:
+  - >-
+    dcb
+    --upstreamgroup andrewrothstein
+    --upstreamapp docker-ansible-role
+    --pull ${OS}
+    --write ${OS}
+    --build ${OS}
+    --push ${OS}

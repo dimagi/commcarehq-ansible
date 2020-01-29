@@ -1,0 +1,25 @@
+branches:
+  except:
+  - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+dist: xenial
+env:
+- OS=debian_jessie
+- OS=debian_stretch
+- OS=fedora_23
+- OS=fedora_24
+- OS=fedora_25
+- OS=fedora_26
+- OS=fedora_27
+- OS=fedora_28
+- OS=fedora_29
+- OS=fedora_30
+- OS=ubuntu_xenial
+language: python
+python: '3.7'
+script:
+- ansible-galaxy-local-deps-write
+- dcb --upstreamgroup andrewrothstein --upstreamapp docker-ansible-role --alltags
+  ${OS} --pullall --writeall --buildall --pushall
+services:
+- docker
+sudo: required

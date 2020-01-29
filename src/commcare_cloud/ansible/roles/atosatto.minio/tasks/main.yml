@@ -1,0 +1,14 @@
+---
+
+- name: Add sni support to legacy python installations
+  include: python_sni.yml
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_python_version is version_compare('2.6.0', '>=')
+    - ansible_python_version is version_compare('2.7.9', '<')
+
+- include: install-server.yml
+  when: minio_install_server
+
+- include: install-client.yml
+  when: minio_install_client
