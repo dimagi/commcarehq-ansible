@@ -51,7 +51,13 @@ class Secrets(CommandBase):
         try:
             secret_value = json.loads(secret_value)
         except ValueError:
-            pass
+            old_value = environment.secrets_backend.get_secret(secret_name)
+            if isinstance(old_value, list) or isinstance(old_value, dict):
+                puts(color_error(
+                    'Could not understand value, please use valid json: {value}'
+                    .format(value=secret_value)
+                ))
+                exit(-1)
         environment.secrets_backend.set_secret(secret_name, secret_value)
 
     def _secrets_append_to_list(self, environment, secret_name):
